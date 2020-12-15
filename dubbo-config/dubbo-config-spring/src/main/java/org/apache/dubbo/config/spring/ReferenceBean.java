@@ -42,7 +42,7 @@ import static org.springframework.beans.factory.BeanFactoryUtils.beansOfTypeIncl
 /**
  * ReferenceFactoryBean
  */
-public class ReferenceBean<T> extends ReferenceConfig<T> implements FactoryBean,
+public class ReferenceBean<T> extends ReferenceConfig<T> implements FactoryBean<T>,
         ApplicationContextAware, InitializingBean, DisposableBean {
 
     private static final long serialVersionUID = 213195494150089726L;
@@ -64,7 +64,7 @@ public class ReferenceBean<T> extends ReferenceConfig<T> implements FactoryBean,
     }
 
     @Override
-    public Object getObject() {
+    public T getObject() {
         return get();
     }
 
@@ -97,7 +97,6 @@ public class ReferenceBean<T> extends ReferenceConfig<T> implements FactoryBean,
     }
 
     @Override
-    @SuppressWarnings({"unchecked"})
     public void afterPropertiesSet() throws Exception {
 
         // Initializes Dubbo's Config Beans before @Reference bean autowiring
